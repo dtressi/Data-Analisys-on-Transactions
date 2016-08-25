@@ -1,28 +1,25 @@
 #Data Sample from Totvs.
 
-#The objective of this document is to analyse the correlations the data
-#and make predictions using machine learning models.
+#The objective of this document is to analyse the correlations of data
+#and make descriptions and predictions using machine learning models.
 
-#Necessary Packages. 
+#Necessary Packages. If you need to install, uncoment the one you need. 
 #install.packages('jsonlite')
 #install.packages('dplyr')
 #install.packages('leaps')
 #install.packages('ggplot2')
 
-#Package to work with R Table (Merge columns as rows). 
+#Package to work with R Tables (Merge columns as rows). 
 library(plyr)
 #Package to work with Json Files.
 library(jsonlite)
 #Plot Package.
 library(ggplot2)
-#Suggest the set of variables for the model.
+#Suggest the set of variables to the model.
 library(leaps)
 
-#Set working Directory.
-setwd("D:/R")
-
 #Load Json File Into R.
-json_data_flat <- jsonlite::fromJSON("sample.txt", flatten=TRUE);
+json_data_flat <- jsonlite::fromJSON("https://raw.githubusercontent.com/dtressi/data-analysis-on-transactions/master/sample.txt", flatten=TRUE);
 
 #View Json file as Row Structure with lists.
 View(json_data_flat);
@@ -98,7 +95,7 @@ myModel <- lm(formula = prod.vProd ~ prod.xProd.fac + num.day.fac, data = fiscal
 #The summary model shows the sensibilities of  Total Product revenue according to each variable.
 summary(myModel);
 
-#Exmple of prediction:The mean revenue of Product "SUCO" on WeekDay "2".
+#Example of prediction:The mean revenue of Product "SUCO" on WeekDay "2".
 input_data <- data.frame( prod.xProd.fac="SUCO", num.day.fac="2");
 
 predict(myModel,input_data,type="response");
